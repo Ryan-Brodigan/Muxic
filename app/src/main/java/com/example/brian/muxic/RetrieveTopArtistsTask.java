@@ -1,9 +1,12 @@
 package com.example.brian.muxic;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,67 +22,80 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
-    private ArrayList<Artist> artists;
-    private TextView textView;
 
-    public RetrieveTopArtistsTask(TextView txtView){
-        textView = txtView;
+    //private TextView textView;
+    private String uriTag = MainActivity.class.getSimpleName();
+    private ProgressBar progressBar;
+    private MainActivity context;
+    protected ListView listView;
+    protected ArrayList<Artist> artistList;
+    private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
+
+    public RetrieveTopArtistsTask(MainActivity context){
+        this.context = context;
+        this.artistList = new ArrayList<>();
+        this.listView = listView;
     }
 
     @Override
     protected void onPreExecute() {
-
+        progressBar = context.findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.VISIBLE);
+        super.onPreExecute();
     }
 
     @Override
     protected Void doInBackground(Void... params) {
-        artists = getTopArtists();
+        uriHandler handler = new uriHandler();
+
+        String stringJson = handler.requestSend(lastFMURL);
+        Log.e(uriTag, "From LastFm" + stringJson);
+
+        if(stringJson != null){
+            try{
+                JSONObject jsonObj = new JSONObject(stringJson);
+                JSONArray library = jsonObj.getJSONObject("artists").getJSONArray("artist");
+
+                for(int i = 0; i < library.length(); i++){
+                    JSONObject lib = library.getJSONObject(i);
+                    String artistName = lib.getString("name");
+                    Integer playCount = lib.getInt("playcount");
+                    Integer listeners = lib.getInt("listeners");
+                    JSONArray getImageURL = lib.getJSONArray("image");
+                    String imageUrl = getImageURL.getJSONObject(1).getString("#text");
+                    Artist newArtists = new Artist(artistName,playCount,listeners,imageUrl);
+                    artistList.add(newArtists);
+                }
+
+            }catch(final JSONException e){
+                Log.e(uriTag, "Parsing Error: " + e.getMessage());
+                context.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context.getApplicationContext(), "Json parsing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }
+        else {
+            Log.e(uriTag, "Couldn't get json from server.");
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context.getApplicationContext(), "Json parsing error: ",Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
         return null;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        textView.setText(artists.get(0).getName());
+    protected void onPostExecute(Void result) {
+        super.onPostExecute(result);
+        progressBar.setVisibility(View.INVISIBLE);
+        ArrayAdapter<Artist> adapter = new ArrayAdapter<Artist>(this.context,R.layout.list_details,R.id.name,artistList);
+        listView.setAdapter(adapter);
     }
 
-    public static ArrayList<Artist> getTopArtists() {
-        ArrayList<Artist> artistsList = new ArrayList<>();
-        try {
-            JSONObject artistsJSON = readJsonFromUrl("http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json");
-            JSONArray artistsJSONArray = artistsJSON.getJSONObject("artists").getJSONArray("artist");
-            String name = artistsJSONArray.getJSONObject(0).getString("name");
-            Integer listeners = artistsJSONArray.getJSONObject(0).getInt("listeners");
-            Integer playcount = artistsJSONArray.getJSONObject(0).getInt("playcount");
-            String imageURL = artistsJSONArray.getJSONObject(0).getJSONArray("image").getJSONObject(2).getString("#text");
-            Log.d("API SHTUFF", "API DATA: " + name + ", " + listeners + ", " + playcount + ", " + imageURL);
-            Artist newArtist = new Artist(name, playcount, listeners, imageURL);
-            artistsList.add(newArtist);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return artistsList;
-    }
-
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
-
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            is.close();
-        }
-    }
 }

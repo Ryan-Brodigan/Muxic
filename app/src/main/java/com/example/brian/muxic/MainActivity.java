@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RetrieveTopTracksTask t = new RetrieveTopTracksTask(MainActivity.this);
-        t.libraryList = new ArrayList<>();
+        RetrieveTopArtistsTask t = new RetrieveTopArtistsTask(MainActivity.this);
+        t.artistList = new ArrayList<>();
         t.listView = findViewById(R.id.list);
         t.execute();
     }

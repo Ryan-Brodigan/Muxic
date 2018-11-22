@@ -32,10 +32,13 @@ public class Track {
     @Override
     public String toString() {
         return new StringBuilder()
-                .append(name)
-                .append(playcount)
-                .append(artistName)
-                .append(imageUrl).toString();
+                .append("Track Name: ").append(name)
+                .append("\n")
+                .append("Play Count: ").append(playcount)
+                .append("\n")
+                .append("Artist Name: ").append(artistName)
+                .append("\n")
+                .append("Image: ").append(imageUrl).toString();
     }
 
 }

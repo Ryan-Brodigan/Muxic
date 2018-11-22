@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import android.widget.ProgressBar;
-import android.widget.TextView;
 //Async Method that pulls the JSON from The Url.
 public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
 
