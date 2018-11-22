@@ -54,21 +54,12 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
                     JSONObject lib = library.getJSONObject(i);
                     String trackName = lib.getString("name");
                     Integer playCount = lib.getInt("playcount");
-
                     JSONObject getArtistName = lib.getJSONObject("artist");
                     String artistName = getArtistName.getString("name");
-
-                    //Reiterate through JSON and get image array and objects.
                     JSONArray getImageURL = lib.getJSONArray("image");
-                    for(int j = 0; j < getImageURL.length(); j++){
-                        JSONObject getImage = getImageURL.getJSONObject(0);
-                        String imageUrl = getImage.getString("#text");
-
-                        Track newTrack = new Track(trackName,playCount,artistName,imageUrl);
-
-                        libraryList.add(newTrack);
-                    }
-
+                    String imageUrl = getImageURL.getJSONObject(1).getString("#text");
+                    Track newTrack = new Track(trackName,playCount,artistName,imageUrl);
+                    libraryList.add(newTrack);
                 }
 
             }catch(final JSONException e){
