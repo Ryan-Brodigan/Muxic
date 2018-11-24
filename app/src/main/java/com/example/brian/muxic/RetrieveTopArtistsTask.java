@@ -26,12 +26,12 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     //private TextView textView;
     private String uriTag = MainActivity.class.getSimpleName();
     private ProgressBar progressBar;
-    private MainActivity context;
+    private DisplayTopArtist context;
     protected ListView listView;
     protected ArrayList<Artist> artistList;
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
 
-    public RetrieveTopArtistsTask(MainActivity context){
+    public RetrieveTopArtistsTask(DisplayTopArtist context){
         this.context = context;
         this.artistList = new ArrayList<>();
         this.listView = listView;

@@ -17,12 +17,13 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
 
     private String uriTag = MainActivity.class.getSimpleName();
     private ProgressBar progressBar;
-    private MainActivity context;
+    private DisplayTopTracks context;
     protected ListView listView;
 
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
     ArrayList<Track> libraryList;
-    public RetrieveTopTracksTask(MainActivity context){
+
+    public RetrieveTopTracksTask(DisplayTopTracks context){
         this.context = context;
         this.libraryList = new ArrayList<>();
         this.listView = listView;

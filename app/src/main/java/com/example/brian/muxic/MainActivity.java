@@ -1,5 +1,6 @@
 package com.example.brian.muxic;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -13,11 +14,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RetrieveTopArtistsTask t = new RetrieveTopArtistsTask(MainActivity.this);
-        t.artistList = new ArrayList<>();
-        t.listView = findViewById(R.id.list);
-        t.execute();
+//        RetrieveTopArtistsTask t = new RetrieveTopArtistsTask(MainActivity.this);
+//        t.artistList = new ArrayList<>();
+//        t.listView = findViewById(R.id.list);
+//        t.execute();
     }
 
 
+    public void topArtists(View view){
+        Intent mintent = new Intent(MainActivity.this, DisplayTopArtist.class);
+        startActivity(mintent);
+    }
+
+    public void topTracks(View view){
+        Intent displayIntent = new Intent(MainActivity.this, DisplayTopTracks.class);
+        startActivity(displayIntent);
+    }
 }
