@@ -2,52 +2,44 @@ package com.example.brian.muxic;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import android.widget.EditText;
 
-public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
+import android.widget.ProgressBar;
+//Async Method that pulls the JSON from The Url.
+public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
 
-    //private TextView textView;
     private String uriTag = MainActivity.class.getSimpleName();
     private ProgressBar progressBar;
-    private DisplayTopArtist context;
+    private DisplayTopTracks context;
     protected ListView listView;
-    protected ArrayList<Artist> artistList;
-    private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
 
-    public RetrieveTopArtistsTask(DisplayTopArtist context){
+    private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
+    ArrayList<Track> libraryList;
+
+    public RetrieveTopTracksTask(DisplayTopTracks context){
         this.context = context;
-        this.artistList = new ArrayList<>();
+        this.libraryList = new ArrayList<>();
         this.listView = listView;
     }
 
+    //Run Progress Bar when pulling json
     @Override
-    protected void onPreExecute() {
+    protected void onPreExecute(){
         progressBar = context.findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.VISIBLE);
         super.onPreExecute();
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
+    protected Void doInBackground(Void... voids) {
+
         uriHandler handler = new uriHandler();
 
         String stringJson = handler.requestSend(lastFMURL);
@@ -56,17 +48,18 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
         if(stringJson != null){
             try{
                 JSONObject jsonObj = new JSONObject(stringJson);
-                JSONArray library = jsonObj.getJSONObject("artists").getJSONArray("artist");
+                JSONArray library = jsonObj.getJSONObject("tracks").getJSONArray("track");
 
                 for(int i = 0; i < library.length(); i++){
                     JSONObject lib = library.getJSONObject(i);
-                    String artistName = lib.getString("name");
+                    String trackName = lib.getString("name");
                     Integer playCount = lib.getInt("playcount");
-                    Integer listeners = lib.getInt("listeners");
+                    JSONObject getArtistName = lib.getJSONObject("artist");
+                    String artistName = getArtistName.getString("name");
                     JSONArray getImageURL = lib.getJSONArray("image");
                     String imageUrl = getImageURL.getJSONObject(1).getString("#text");
-                    Artist newArtists = new Artist(artistName,playCount,listeners,imageUrl);
-                    artistList.add(newArtists);
+                    Track newTrack = new Track(trackName,playCount,artistName,imageUrl);
+                    libraryList.add(newTrack);
                 }
 
             }catch(final JSONException e){
@@ -96,7 +89,7 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         progressBar.setVisibility(View.INVISIBLE);
-        ArrayAdapter<Artist> adapter = new ArrayAdapter<Artist>(this.context,R.layout.list_details,R.id.name,artistList);
+        ArrayAdapter<Track> adapter = new ArrayAdapter<Track>(this.context,R.layout.list_details,R.id.name,libraryList);
         listView.setAdapter(adapter);
     }
 
