@@ -25,7 +25,7 @@ public class DisplayTopArtist extends AppCompatActivity {
                 i.putExtra("ArtistName", a.getName());
                 i.putExtra("ArtistListeners", a.getListeners());
                 i.putExtra("ArtistPlaycount", a.getPlaycount());
-                i.putExtra("ArtistImage", a.getImageURL().get(0));
+                i.putExtra("ArtistImage", a.getImageURL().get(2));
                 startActivity(i);
             }
         });
