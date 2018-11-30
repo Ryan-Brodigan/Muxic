@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Muxic</string>
     <string name="top_artists">Top Artists</string>
+    <string name="listeners" />
+    <string name="playcountvalue" />
+    <string name="listenersvalue" />
+    <string name="playcount" />
+    <string name="artistpicture" />
+    <string name="artistnamehere" />
 </resources>

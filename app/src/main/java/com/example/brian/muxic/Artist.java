@@ -1,12 +1,13 @@
 package com.example.brian.muxic;
+import java.util.ArrayList;
 
 public class Artist {
     private String name;
     private Integer playcount;
     private Integer listeners;
-    private String imageURL;
+    private ArrayList<String> imageURL;
 
-    public Artist(String name, Integer playcount, Integer listeners, String imageURL){
+    public Artist(String name, Integer playcount, Integer listeners, ArrayList<String> imageURL){
         this.name = name;
         this.playcount = playcount;
         this.listeners = listeners;
@@ -25,11 +26,11 @@ public class Artist {
         return this.listeners;
     }
 
-    public String getImageURL(){
+    public ArrayList<String> getImageURL(){
         return this.imageURL;
     }
 
     public String toString(){
-        return "Name: " + this.name + ", Listeners: " + this.listeners + ", Playcount: " + this.playcount + ", imageURL: " + this.imageURL;
+        return "Name: " + this.name + ", Listeners: " + this.listeners + ", Playcount: " + this.playcount + ", imageURL: " + this.imageURL.toString();
     }
 }

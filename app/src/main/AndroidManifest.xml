@@ -18,7 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayTopArtist" />
-        <activity android:name=".DisplayTopTracks" />
+        <activity android:name=".DisplayTopArtist"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DisplayTopTracks"
+            android:parentActivityName=".MainActivity"/>/>
+        <activity android:name=".DetailedArtistViewActivity"
+            android:parentActivityName=".DisplayTopArtist"
+            android:label="Detailed Artist View"/>
     </application>
 </manifest>
