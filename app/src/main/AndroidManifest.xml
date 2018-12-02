@@ -20,15 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayTopArtist"
-                  android:parentActivityName=".MainActivity"
-                  android:label="Top Artists"/>
-        <activity android:name=".DisplayTopTracks"
-                  android:parentActivityName=".MainActivity"
-                  android:label="Top Tracks"/>
-        <activity android:name=".DetailedArtistViewActivity"
-                  android:parentActivityName=".DisplayTopArtist"
-                  android:label="Detailed Artist View"/>
+        <activity
+            android:name=".DisplayTopArtist"
+            android:label="Top Artists"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DisplayTopTracks"
+            android:label="Top Tracks"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DetailedArtistViewActivity"
+            android:label="Detailed Artist View"
+            android:parentActivityName=".DisplayTopArtist" />
+        <activity android:name=".DetailedTrackViewActivity"></activity>
     </application>
 
 </manifest>

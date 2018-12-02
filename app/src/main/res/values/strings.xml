@@ -7,4 +7,9 @@
     <string name="listeners">Listeners:</string>
     <string name="playcountvalue">playcountValue</string>
     <string name="listenersvalue">listenersValue</string>
+    <string name="last_fm_page">Last FM Page</string>
+    <string name="tracknamehere">TrackNameHere</string>
+    <string name="artist">Artist</string>
+    <string name="artistlabel">Artist:</string>
+    <string name="artistvalue">artistValue</string>
 </resources>

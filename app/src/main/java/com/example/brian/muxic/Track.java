@@ -1,13 +1,17 @@
 package com.example.brian.muxic;
 
+import java.util.ArrayList;
+
 public class Track {
     private String name;
+    private String lastFMUrl;
     private Integer playcount;
     private String artistName;
-    private String imageUrl;
+    private ArrayList<String> imageUrl;
 
-    public Track(String name, Integer playcount, String artistName, String imageUrl){
+    public Track(String name, String lastFMUrl, Integer playcount, String artistName, ArrayList<String> imageUrl){
         this.name = name;
+        this.lastFMUrl = lastFMUrl;
         this.playcount = playcount;
         this.artistName = artistName;
         this.imageUrl = imageUrl;
@@ -15,6 +19,10 @@ public class Track {
 
     public String getName(){
         return this.name;
+    }
+
+    public String getLastFMUrl(){
+        return this.lastFMUrl;
     }
 
     public Integer getPlaycount(){
@@ -25,7 +33,7 @@ public class Track {
         return this.artistName;
     }
 
-    public String getImageUrl(){
+    public ArrayList<String> getImageUrl(){
         return this.imageUrl;
     }
 

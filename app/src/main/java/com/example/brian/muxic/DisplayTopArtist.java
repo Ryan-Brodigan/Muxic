@@ -23,6 +23,7 @@ public class DisplayTopArtist extends AppCompatActivity {
                 Artist a = (Artist) parent.getItemAtPosition(position);
                 Intent i = new Intent(DisplayTopArtist.this, DetailedArtistViewActivity.class);
                 i.putExtra("ArtistName", a.getName());
+                i.putExtra("ArtistUrl", a.getLastFMUrl());
                 i.putExtra("ArtistListeners", a.getListeners());
                 i.putExtra("ArtistPlaycount", a.getPlaycount());
                 i.putExtra("ArtistImage", a.getImageURL().get(2));
