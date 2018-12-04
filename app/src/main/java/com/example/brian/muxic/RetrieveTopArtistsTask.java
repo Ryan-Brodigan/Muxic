@@ -61,11 +61,18 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                 for(int i = 0; i < library.length(); i++){
                     JSONObject lib = library.getJSONObject(i);
                     String artistName = lib.getString("name");
+                    String lastFMUrl = lib.getString("url");
                     Integer playCount = lib.getInt("playcount");
                     Integer listeners = lib.getInt("listeners");
                     JSONArray getImageURL = lib.getJSONArray("image");
-                    String imageUrl = getImageURL.getJSONObject(1).getString("#text");
-                    Artist newArtists = new Artist(artistName,playCount,listeners,imageUrl);
+                    String smallImageUrl = getImageURL.getJSONObject(0).getString("#text");
+                    String mediumImageUrl = getImageURL.getJSONObject(1).getString("#text");
+                    String largeImageUrl = getImageURL.getJSONObject(2).getString("#text");
+                    ArrayList<String> images = new ArrayList<>();
+                    images.add(smallImageUrl);
+                    images.add(mediumImageUrl);
+                    images.add(largeImageUrl);
+                    Artist newArtists = new Artist(artistName,lastFMUrl,playCount,listeners,images);
                     artistList.add(newArtists);
                 }
 

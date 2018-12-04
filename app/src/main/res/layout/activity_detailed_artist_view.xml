@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailedArtistViewActivity">
+
+    <TextView
+        android:id="@+id/detailedArtistView_NameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/artistnamehere"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/artistMediumImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/artistpicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailedArtistView_NameTitle" />
+
+    <TextView
+        android:id="@+id/playcountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/playcount"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/detailedArtistView_NameTitle" />
+
+    <TextView
+        android:id="@+id/listenersLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/listeners"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/playcountLabel" />
+
+    <TextView
+        android:id="@+id/playcountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/playcountvalue"
+        app:layout_constraintStart_toEndOf="@+id/playcountLabel"
+        app:layout_constraintTop_toTopOf="@+id/playcountLabel" />
+
+    <TextView
+        android:id="@+id/listenersValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/listenersvalue"
+        app:layout_constraintStart_toEndOf="@+id/listenersLabel"
+        app:layout_constraintTop_toTopOf="@+id/listenersLabel" />
+
+    <Button
+        android:id="@+id/goToLastFMButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/last_fm_page"
+        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/listenersLabel" />
+</android.support.constraint.ConstraintLayout>
