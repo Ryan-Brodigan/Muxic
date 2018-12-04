@@ -12,4 +12,5 @@
     <string name="artist">Artist</string>
     <string name="artistlabel">Artist:</string>
     <string name="artistvalue">artistValue</string>
+    <string name="top_tracks">Top Tracks</string>
 </resources>

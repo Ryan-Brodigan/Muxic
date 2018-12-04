@@ -14,7 +14,7 @@
         android:layout_marginTop="132dp"
         android:layout_marginEnd="8dp"
         android:onClick="topArtists"
-        android:text="Top Artists"
+        android:text="@string/top_artists"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="topTracks"
-        android:text="Top Tracks"
+        android:text="@string/top_tracks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
