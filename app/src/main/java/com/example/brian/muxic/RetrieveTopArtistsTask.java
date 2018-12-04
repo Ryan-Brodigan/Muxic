@@ -72,7 +72,9 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                     images.add(smallImageUrl);
                     images.add(mediumImageUrl);
                     images.add(largeImageUrl);
+                    //Artist newArtists = new Artist(artistName,playCount,listeners,images);
                     Artist newArtists = new Artist(artistName,lastFMUrl,playCount,listeners,images);
+
                     artistList.add(newArtists);
                 }
 
