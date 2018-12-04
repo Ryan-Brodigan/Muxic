@@ -1,8 +1,6 @@
 package com.example.brian.muxic;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,17 +11,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
-import java.net.URL;
-
-public class DetailedArtistViewActivity extends AppCompatActivity {
+public class DetailedTrackViewActivity extends AppCompatActivity {
 
     private String lastFMUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_artist_view);
+        setContentView(R.layout.activity_detailed_track_view);
         Intent i = getIntent();
         parseValues(i);
 
@@ -49,11 +44,11 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.action_top_artists:
-                Intent aActivity = new Intent(DetailedArtistViewActivity.this, DisplayTopArtist.class);
+                Intent aActivity = new Intent(DetailedTrackViewActivity.this, DisplayTopArtist.class);
                 startActivity(aActivity);
                 return true;
             case R.id.action_top_tracks:
-                Intent tActivity = new Intent(DetailedArtistViewActivity.this, DisplayTopTracks.class);
+                Intent tActivity = new Intent(DetailedTrackViewActivity.this, DisplayTopTracks.class);
                 startActivity(tActivity);
                 return true;
         }
@@ -68,28 +63,27 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
 
     public void parseValues(Intent i){
         //Extract values from Intent
+        String trackName = i.getExtras().getString("TrackName");
         String artistName = i.getExtras().getString("ArtistName");
-        String artistImageURL = i.getExtras().getString("ArtistImage");
-        Integer artistListeners = i.getExtras().getInt("ArtistListeners", 0);
-        Integer artistPlaycount = i.getExtras().getInt("ArtistPlaycount", 0);
+        String trackImageURL = i.getExtras().getString("TrackImage");
+        Integer trackPlaycount = i.getExtras().getInt("TrackPlaycount", 0);
 
         // Assign lastFMUrl value
-        this.lastFMUrl = i.getExtras().getString("ArtistUrl");
+        this.lastFMUrl = i.getExtras().getString("TrackUrl");
 
         //Get appropriate Views
-        TextView artistNameView = findViewById(R.id.detailedArtistView_NameTitle);
-        TextView artistListenersView =  findViewById(R.id.listenersValue);
-        TextView artistPlaycountView =  findViewById(R.id.playcountValue);
-        ImageView artistImageView = findViewById(R.id.artistMediumImage);
+        TextView trackNameView = findViewById(R.id.detailedTrackView_NameTitle);
+        TextView trackArtistView =  findViewById(R.id.artistValue);
+        TextView trackPlaycountView =  findViewById(R.id.playcountValue);
+        ImageView trackImageView = findViewById(R.id.trackMediumImage);
 
         //Apply appropriate values
-        artistNameView.setText(artistName);
-        artistListenersView.setText(artistListeners.toString());
-        artistPlaycountView.setText(artistPlaycount.toString());
+        trackNameView.setText(trackName);
+        trackArtistView.setText(artistName);
+        trackPlaycountView.setText(trackPlaycount.toString());
 
         //Use AsyncTask to download and apply image
-        DownloadImageTask t = new DownloadImageTask(artistImageView, artistImageURL);
+        DownloadImageTask t = new DownloadImageTask(trackImageView, trackImageURL);
         t.execute();
     }
-
 }

@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailedArtistViewActivity">
+    tools:context=".DetailedTrackViewActivity">
 
     <TextView
-        android:id="@+id/detailedArtistView_NameTitle"
+        android:id="@+id/detailedTrackView_NameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/artistnamehere"
+        android:text="@string/tracknamehere"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/artistMediumImage"
+        android:id="@+id/trackMediumImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/artistpicture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailedArtistView_NameTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/detailedTrackView_NameTitle" />
 
     <TextView
         android:id="@+id/playcountLabel"
@@ -35,18 +35,18 @@
         android:layout_marginTop="64dp"
         android:text="@string/playcount"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
-        app:layout_constraintTop_toBottomOf="@+id/detailedArtistView_NameTitle" />
+        app:layout_constraintStart_toEndOf="@+id/trackMediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/detailedTrackView_NameTitle" />
 
     <TextView
-        android:id="@+id/listenersLabel"
+        android:id="@+id/artistLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="@string/listeners"
+        android:text="@string/artistlabel"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
+        app:layout_constraintStart_toEndOf="@+id/trackMediumImage"
         app:layout_constraintTop_toBottomOf="@+id/playcountLabel" />
 
     <TextView
@@ -60,14 +60,14 @@
         app:layout_constraintTop_toTopOf="@+id/playcountLabel" />
 
     <TextView
-        android:id="@+id/listenersValue"
+        android:id="@+id/artistValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="@string/listenersvalue"
-        app:layout_constraintStart_toEndOf="@+id/listenersLabel"
-        app:layout_constraintTop_toTopOf="@+id/listenersLabel" />
+        android:text="@string/artistvalue"
+        app:layout_constraintStart_toEndOf="@+id/artistLabel"
+        app:layout_constraintTop_toTopOf="@+id/artistLabel" />
 
     <Button
         android:id="@+id/goToLastFMButton"
@@ -76,6 +76,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:text="@string/last_fm_page"
-        app:layout_constraintStart_toEndOf="@+id/artistMediumImage"
-        app:layout_constraintTop_toBottomOf="@+id/listenersLabel" />
+        app:layout_constraintStart_toEndOf="@+id/trackMediumImage"
+        app:layout_constraintTop_toBottomOf="@+id/artistLabel" />
 </android.support.constraint.ConstraintLayout>
