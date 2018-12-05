@@ -32,7 +32,7 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     protected ListView listView;
     protected ArrayList<Artist> artistList;
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
-
+    private ArtistAdapter artistAdapter;
     public RetrieveTopArtistsTask(DisplayTopArtist context){
         this.context = context;
         this.artistList = new ArrayList<>();
@@ -73,7 +73,7 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                     images.add(mediumImageUrl);
                     images.add(largeImageUrl);
                     //Artist newArtists = new Artist(artistName,playCount,listeners,images);
-                    Artist newArtists = new Artist(artistName,lastFMUrl,playCount,listeners,images);
+                    Artist newArtists = new Artist(artistName,lastFMUrl,playCount,listeners,mediumImageUrl,images);
 
                     artistList.add(newArtists);
                 }
@@ -105,8 +105,8 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         progressBar.setVisibility(View.INVISIBLE);
-        ArrayAdapter<Artist> adapter = new ArrayAdapter<Artist>(this.context,R.layout.list_details,R.id.name,artistList);
-        listView.setAdapter(adapter);
+        artistAdapter = new ArtistAdapter(this.context, artistList);
+        listView.setAdapter(artistAdapter);
     }
 
 }

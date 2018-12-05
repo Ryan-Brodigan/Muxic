@@ -66,7 +66,7 @@ public class TrackAdapter extends BaseAdapter {
         }
 
         Picasso.get().load(trackArr.get(position).getImageURL2()).into(holder.iv);
-        holder.artistName.setText("Artist Name:\t "+ trackArr.get(position).getName());
+        holder.artistName.setText("Track Name: "+ trackArr.get(position).getName());
 
         return convertView;
     }
