@@ -19,9 +19,9 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
     private ProgressBar progressBar;
     private DisplayTopTracks context;
     protected ListView listView;
-
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
     ArrayList<Track> libraryList;
+    private TrackAdapter trackAdapter;
 
     public RetrieveTopTracksTask(DisplayTopTracks context){
         this.context = context;
@@ -29,7 +29,6 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
         this.listView = listView;
     }
 
-    //Run Progress Bar when pulling json
     @Override
     protected void onPreExecute(){
         progressBar = context.findViewById(R.id.progressBar1);
@@ -65,7 +64,7 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
                     images.add(smallImageUrl);
                     images.add(mediumImageUrl);
                     images.add(largeImageUrl);
-                    Track newTrack = new Track(trackName, lastFMUrl, playCount,artistName,images);
+                    Track newTrack = new Track(trackName, lastFMUrl, playCount,artistName,images,mediumImageUrl);
                     libraryList.add(newTrack);
                 }
 
@@ -96,8 +95,8 @@ public class RetrieveTopTracksTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         progressBar.setVisibility(View.INVISIBLE);
-        ArrayAdapter<Track> adapter = new ArrayAdapter<Track>(this.context,R.layout.list_details,R.id.name,libraryList);
-        listView.setAdapter(adapter);
+        trackAdapter = new TrackAdapter(this.context, libraryList);
+        listView.setAdapter(trackAdapter);
     }
 
 }

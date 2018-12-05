@@ -7,14 +7,16 @@ public class Artist {
     private String lastFMUrl;
     private Integer playcount;
     private Integer listeners;
-    private ArrayList<String> imageURL;
+    private String imageURL;
+    private ArrayList<String> imageURL2;
 
-    public Artist(String name, String lastFMUrl, Integer playcount, Integer listeners, ArrayList<String> imageURL){
+    public Artist(String name, String lastFMUrl, Integer playcount, Integer listeners, String imageURL,ArrayList<String> imageURL2){
         this.name = name;
         this.lastFMUrl = lastFMUrl;
         this.playcount = playcount;
         this.listeners = listeners;
         this.imageURL = imageURL;
+        this.imageURL2 = imageURL2;
     }
 
     public String getName(){
@@ -31,11 +33,19 @@ public class Artist {
         return this.listeners;
     }
 
-    public ArrayList<String> getImageURL(){
+    public String getImageURL(){
         return this.imageURL;
     }
 
-    public String toString(){
-        return "Name: " + this.name + ", LastFMUrl: " + this.lastFMUrl + ", Listeners: " + this.listeners + ", Playcount: " + this.playcount + ", imageURL: " + this.imageURL.toString();
+    public ArrayList<String> getImageURL2(){
+        return this.imageURL2;
     }
+
+//    public String toString(){
+//        return new StringBuilder()
+//                .append("Artist Name: ").append(name)
+//                .append("\n")
+//                .append("\n")
+//                .append("Image: ").append(imageURL).toString();
+//    }
 }
