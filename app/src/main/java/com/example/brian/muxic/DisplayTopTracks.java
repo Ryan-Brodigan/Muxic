@@ -54,9 +54,7 @@ public class DisplayTopTracks extends AppCompatActivity {
                 startActivity(aActivity);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }
 

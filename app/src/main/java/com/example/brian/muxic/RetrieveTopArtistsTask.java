@@ -3,36 +3,26 @@ package com.example.brian.muxic;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import android.widget.EditText;
 
-public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
+public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> implements SearchView.OnQueryTextListener {
 
-    //private TextView textView;
     private String uriTag = MainActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private DisplayTopArtist context;
     protected ListView listView;
-    protected ArrayList<Artist> artistList;
+    protected static ArrayList<Artist> artistList;
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
     private ArtistAdapter artistAdapter;
+    private SearchView editsearch;
+
     public RetrieveTopArtistsTask(DisplayTopArtist context){
         this.context = context;
         this.artistList = new ArrayList<>();
@@ -49,7 +39,6 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         uriHandler handler = new uriHandler();
-
         String stringJson = handler.requestSend(lastFMURL);
         Log.e(uriTag, "From LastFm" + stringJson);
 
@@ -57,7 +46,6 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
             try{
                 JSONObject jsonObj = new JSONObject(stringJson);
                 JSONArray library = jsonObj.getJSONObject("artists").getJSONArray("artist");
-
                 for(int i = 0; i < library.length(); i++){
                     JSONObject lib = library.getJSONObject(i);
                     String artistName = lib.getString("name");
@@ -73,10 +61,8 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                     images.add(mediumImageUrl);
                     images.add(largeImageUrl);
                     Artist newArtists = new Artist(artistName,lastFMUrl,playCount,listeners,mediumImageUrl,images);
-
                     artistList.add(newArtists);
                 }
-
             }catch(final JSONException e){
                 Log.e(uriTag, "Parsing Error: " + e.getMessage());
                 context.runOnUiThread(new Runnable() {
@@ -95,7 +81,6 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                     Toast.makeText(context.getApplicationContext(), "Json parsing error: ",Toast.LENGTH_LONG).show();
                 }
             });
-
         }
         return null;
     }
@@ -106,6 +91,23 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
         progressBar.setVisibility(View.INVISIBLE);
         artistAdapter = new ArtistAdapter(this.context, artistList);
         listView.setAdapter(artistAdapter);
+        editsearch = (SearchView) this.context.findViewById(R.id.search);
+        editsearch.setOnQueryTextListener(this);
     }
+
+    //when a user types the query, this method will be executed.
+    //For example, if he types “a,” then this method will run, simultaneously for all other words.
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        artistAdapter.filter(text);
+        return false;
+    }
+
 
 }

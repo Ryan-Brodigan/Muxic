@@ -40,12 +40,4 @@ public class Artist {
     public ArrayList<String> getImageURL2(){
         return this.imageURL2;
     }
-
-//    public String toString(){
-//        return new StringBuilder()
-//                .append("Artist Name: ").append(name)
-//                .append("\n")
-//                .append("\n")
-//                .append("Image: ").append(imageURL).toString();
-//    }
 }

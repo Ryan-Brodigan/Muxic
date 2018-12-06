@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     public void topArtists(View view){
         Intent mintent = new Intent(MainActivity.this, DisplayTopArtist.class);
         startActivity(mintent);
