@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class DetailedArtistViewActivity extends AppCompatActivity {
-
     private String lastFMUrl;
 
     @Override
@@ -26,7 +25,6 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_artist_view);
         Intent i = getIntent();
         parseValues(i);
-
         final Button button = findViewById(R.id.goToLastFMButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -57,7 +55,6 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
                 startActivity(tActivity);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -72,24 +69,19 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
         String artistImageURL = i.getExtras().getString("ArtistImage");
         Integer artistListeners = i.getExtras().getInt("ArtistListeners", 0);
         Integer artistPlaycount = i.getExtras().getInt("ArtistPlaycount", 0);
-
         // Assign lastFMUrl value
         this.lastFMUrl = i.getExtras().getString("ArtistUrl");
-
         //Get appropriate Views
         TextView artistNameView = findViewById(R.id.detailedArtistView_NameTitle);
         TextView artistListenersView =  findViewById(R.id.listenersValue);
         TextView artistPlaycountView =  findViewById(R.id.playcountValue);
         ImageView artistImageView = findViewById(R.id.artistMediumImage);
-
         //Apply appropriate values
         artistNameView.setText(artistName);
         artistListenersView.setText(artistListeners.toString());
         artistPlaycountView.setText(artistPlaycount.toString());
-
         //Use AsyncTask to download and apply image
         DownloadImageTask t = new DownloadImageTask(artistImageView, artistImageURL);
         t.execute();
     }
-
 }

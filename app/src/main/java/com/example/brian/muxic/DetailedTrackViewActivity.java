@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetailedTrackViewActivity extends AppCompatActivity {
-
     private String lastFMUrl;
 
     @Override
@@ -21,7 +20,6 @@ public class DetailedTrackViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed_track_view);
         Intent i = getIntent();
         parseValues(i);
-
         final Button button = findViewById(R.id.goToLastFMButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -67,21 +65,17 @@ public class DetailedTrackViewActivity extends AppCompatActivity {
         String artistName = i.getExtras().getString("ArtistName");
         String trackImageURL = i.getExtras().getString("TrackImage");
         Integer trackPlaycount = i.getExtras().getInt("TrackPlaycount", 0);
-
         // Assign lastFMUrl value
         this.lastFMUrl = i.getExtras().getString("TrackUrl");
-
         //Get appropriate Views
         TextView trackNameView = findViewById(R.id.detailedTrackView_NameTitle);
         TextView trackArtistView =  findViewById(R.id.artistValue);
         TextView trackPlaycountView =  findViewById(R.id.playcountValue);
         ImageView trackImageView = findViewById(R.id.trackMediumImage);
-
         //Apply appropriate values
         trackNameView.setText(trackName);
         trackArtistView.setText(artistName);
         trackPlaycountView.setText(trackPlaycount.toString());
-
         //Use AsyncTask to download and apply image
         DownloadImageTask t = new DownloadImageTask(trackImageView, trackImageURL);
         t.execute();

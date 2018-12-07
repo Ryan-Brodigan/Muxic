@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class DisplayTopArtist extends AppCompatActivity {
 
-    //ImageView ivBasicImage = (ImageView) findViewById(R.id.thumbnails);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +55,6 @@ public class DisplayTopArtist extends AppCompatActivity {
                 startActivity(tActivity);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }
