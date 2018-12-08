@@ -41,8 +41,15 @@
             android:name=".FavouritesMenuActivity"
             android:label="Favourites Menu"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".DisplayFavouriteArtistsActivity" />
-        <activity android:name=".DisplayFavouriteTracksActivity"></activity>
+        <activity
+            android:name=".DisplayFavouriteArtistsActivity"
+            android:label="Favourite Artists"
+            android:parentActivityName=".FavouritesMenuActivity"
+            />
+        <activity
+            android:name=".DisplayFavouriteTracksActivity"
+            android:label="Favourite Tracks"
+            android:parentActivityName=".FavouritesMenuActivity"/>
     </application>
 
 </manifest>
