@@ -13,4 +13,9 @@
     <string name="artistlabel">Artist:</string>
     <string name="artistvalue">artistValue</string>
     <string name="top_tracks">Top Tracks</string>
+    <string name="favourites">Favourites</string>
+    <string name="favourite_artists">Favourite Artists</string>
+    <string name="favourite_tracks">Favourite Tracks</string>
+    <string name="favourite">Favourite</string>
+    <string name="unfavourite">Unfavourite</string>
 </resources>

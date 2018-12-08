@@ -18,12 +18,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void topArtists(View view){
-        Intent mintent = new Intent(MainActivity.this, DisplayTopArtist.class);
-        startActivity(mintent);
+        Intent artistsintent = new Intent(MainActivity.this, DisplayTopArtist.class);
+        startActivity(artistsintent);
     }
 
     public void topTracks(View view){
-        Intent displayIntent = new Intent(MainActivity.this, DisplayTopTracks.class);
-        startActivity(displayIntent);
+        Intent tracksIntent = new Intent(MainActivity.this, DisplayTopTracks.class);
+        startActivity(tracksIntent);
+    }
+
+    public void favourites(View view){
+        Intent favouritesIntent = new Intent(MainActivity.this, FavouritesMenuActivity.class);
+        startActivity(favouritesIntent);
     }
 }

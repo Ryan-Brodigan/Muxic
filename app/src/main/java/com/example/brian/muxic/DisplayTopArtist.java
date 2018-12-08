@@ -24,6 +24,7 @@ public class DisplayTopArtist extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Artist a = (Artist) parent.getItemAtPosition(position);
                 Intent i = new Intent(DisplayTopArtist.this, DetailedArtistViewActivity.class);
+                i.putExtra("ArtistID", a.getID());
                 i.putExtra("ArtistName", a.getName());
                 i.putExtra("ArtistUrl", a.getLastFMUrl());
                 i.putExtra("ArtistListeners", a.getListeners());
