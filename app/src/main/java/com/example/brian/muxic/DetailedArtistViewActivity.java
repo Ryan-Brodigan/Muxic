@@ -1,6 +1,7 @@
 package com.example.brian.muxic;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
 
     private Artist viewArtist;
     private ArtistViewModel artistVM;
+    private String lastFMUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,6 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
                 startActivity(tActivity);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -135,7 +136,7 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
         //Create viewArtist
         ArrayList<String> images = new ArrayList<>();
         images.add(artistImageURL);
-        viewArtist = new Artist(artistID, artistName, lastFMUrl, artistPlaycount, artistListeners, images);
+        viewArtist = new Artist(artistID, artistName, lastFMUrl, artistPlaycount, artistListeners, images.get(0), images);
     }
 
 }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,8 @@ public class DisplayTopArtist extends AppCompatActivity {
                 i.putExtra("ArtistUrl", a.getLastFMUrl());
                 i.putExtra("ArtistListeners", a.getListeners());
                 i.putExtra("ArtistPlaycount", a.getPlaycount());
-                i.putExtra("ArtistImage", a.getImageURL().get(2));
+                i.putExtra("ArtistImg",a.getImageURL());
+                i.putExtra("ArtistImage", a.getImageURL2().get(2));
                 startActivity(i);
             }
         });
@@ -54,8 +56,6 @@ public class DisplayTopArtist extends AppCompatActivity {
                 startActivity(tActivity);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -26,13 +26,15 @@ public class Track {
 
     @ColumnInfo(name = "imageUrls")
     private ArrayList<String> imageUrl;
+    private String imageURL2;
 
-    public Track(String name, String lastFMUrl, Integer playcount, String artistName, ArrayList<String> imageUrl){
+    public Track(String name, String lastFMUrl, Integer playcount, String artistName, ArrayList<String> imageUrl, String imageURL2){
         this.name = name;
         this.lastFMUrl = lastFMUrl;
         this.playcount = playcount;
         this.artistName = artistName;
         this.imageUrl = imageUrl;
+        this.imageURL2 = imageURL2;
     }
 
     public String getName(){
@@ -55,6 +57,10 @@ public class Track {
         return this.imageUrl;
     }
 
+    public String getImageURL2(){
+        return this.imageURL2;
+    }
+
     public void setName(String name) {this.name = name;}
 
     public void setLastFMUrl(String lastFMUrl) {this.lastFMUrl = lastFMUrl;}
@@ -64,6 +70,8 @@ public class Track {
     public void setArtistName(String artistName) {this.artistName = artistName;}
 
     public void setImageUrl(ArrayList<String> imageUrl) {this.imageUrl = imageUrl;}
+
+    public void setImageUrl2(String imageUrl2) {this.imageURL2 = imageUrl2;}
 
     @Override
     public String toString() {
@@ -75,6 +83,6 @@ public class Track {
                 .append("Artist Name: ").append(artistName)
                 .append("\n")
                 .append("Image: ").append(imageUrl).toString();
-    }
 
+    }
 }

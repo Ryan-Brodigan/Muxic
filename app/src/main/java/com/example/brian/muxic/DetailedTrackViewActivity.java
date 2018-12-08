@@ -31,8 +31,8 @@ public class DetailedTrackViewActivity extends AppCompatActivity {
 
         checkIfFavourited();
 
-        final Button lastFMButton = findViewById(R.id.goToLastFMButton);
-        lastFMButton.setOnClickListener(new View.OnClickListener() {
+        final Button button = findViewById(R.id.goToLastFMButton);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 openLastFMUrl();
             }
@@ -143,6 +143,6 @@ public class DetailedTrackViewActivity extends AppCompatActivity {
         //Create viewTrack object from the parameters
         ArrayList<String> images = new ArrayList<>();
         images.add(trackImageURL);
-        this.viewTrack = new Track(trackName, lastFMUrl, trackPlaycount, artistName, images);
+        this.viewTrack = new Track(trackName, lastFMUrl, trackPlaycount, artistName, images, images.get(0));
     }
 }

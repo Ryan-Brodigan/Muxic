@@ -27,16 +27,19 @@ public class Artist {
     @ColumnInfo(name = "listeners")
     private Integer listeners;
 
-    @ColumnInfo(name = "imageUrls")
-    private ArrayList<String> imageURL;
+    private String imageURL;
 
-    public Artist(String ID, String name, String lastFMUrl, Integer playcount, Integer listeners, ArrayList<String> imageURL){
+    @ColumnInfo(name = "imageUrls")
+    private ArrayList<String> imageURL2;
+
+    public Artist(String ID, String name, String lastFMUrl, Integer playcount, Integer listeners, String imageURL,ArrayList<String> imageURL2){
         this.ID = ID;
         this.name = name;
         this.lastFMUrl = lastFMUrl;
         this.playcount = playcount;
         this.listeners = listeners;
         this.imageURL = imageURL;
+        this.imageURL2 = imageURL2;
     }
 
     public String getID() {return this.ID;}
@@ -55,10 +58,13 @@ public class Artist {
         return this.listeners;
     }
 
-    public ArrayList<String> getImageURL(){
+    public String getImageURL(){
         return this.imageURL;
     }
 
+    public ArrayList<String> getImageURL2() {
+        return this.imageURL2;
+    }
     public void setID(String ID) {this.ID = ID;}
 
     public void setName(String name) {this.name = name;}
@@ -69,7 +75,9 @@ public class Artist {
 
     public void setListeners(Integer listeners) {this.listeners = listeners;}
 
-    public void setImageURL(ArrayList<String> imageURL) {this.imageURL = imageURL;}
+    public void setImageURL(String imageURL) {this.imageURL = imageURL;}
+
+    public void setImageURL2(ArrayList<String> imageURL2) {this.imageURL2 = imageURL2;}
 
     public String toString(){
         return "ID: " + this.ID + ", Name: " + this.name + ", LastFMUrl: " + this.lastFMUrl + ", Listeners: " + this.listeners + ", Playcount: " + this.playcount + ", imageURL: " + this.imageURL.toString();

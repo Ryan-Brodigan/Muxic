@@ -10,24 +10,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class uriHandler {
-
     //The java.lang.Class.getSimpleName() returns the simple name of the underlying class as given in the source code.
     private static final String uriTag = uriHandler.class.getSimpleName();
 
-
-    public uriHandler(){
-
-    }
+    public uriHandler(){}
 
     public String requestSend(String requestToUrl){
-
         String res = null;
 
         try{
             URL url = new URL(requestToUrl);
             HttpURLConnection connect = (HttpURLConnection) url.openConnection();
             connect.setRequestMethod("GET");
-
             InputStream inputStream = new BufferedInputStream(connect.getInputStream());
             res = convertJsonToString(inputStream);
         }catch(IOException e){
@@ -35,7 +29,6 @@ public class uriHandler {
         } catch (Exception e) {
             Log.e(uriTag, "Exception: " + e.getMessage());
         }
-
         return res;
     }
 

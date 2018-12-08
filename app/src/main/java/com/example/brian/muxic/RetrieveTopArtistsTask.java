@@ -7,8 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,15 +23,16 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import android.widget.EditText;
 
-public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
+public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> implements SearchView.OnQueryTextListener {
 
-    //private TextView textView;
     private String uriTag = MainActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private DisplayTopArtist context;
     protected ListView listView;
-    protected ArrayList<Artist> artistList;
+    protected static ArrayList<Artist> artistList;
     private static String lastFMURL = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=74f88c78b264c0f0bcb407833629961b&format=json";
+    private ArtistAdapter artistAdapter;
+    private SearchView editsearch;
 
     public RetrieveTopArtistsTask(DisplayTopArtist context){
         this.context = context;
@@ -73,7 +74,7 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
                     images.add(smallImageUrl);
                     images.add(mediumImageUrl);
                     images.add(largeImageUrl);
-                    Artist newArtists = new Artist(ID,artistName,lastFMUrl,playCount,listeners,images);
+                    Artist newArtists = new Artist(ID,artistName,lastFMUrl,playCount,listeners,mediumImageUrl,images);
                     artistList.add(newArtists);
                 }
 
@@ -104,8 +105,25 @@ public class RetrieveTopArtistsTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
         progressBar.setVisibility(View.INVISIBLE);
-        ArrayAdapter<Artist> adapter = new ArrayAdapter<Artist>(this.context,R.layout.list_details,R.id.name,artistList);
-        listView.setAdapter(adapter);
+        artistAdapter = new ArtistAdapter(this.context, artistList);
+        listView.setAdapter(artistAdapter);
+        editsearch = (SearchView) this.context.findViewById(R.id.search);
+        editsearch.setOnQueryTextListener(this);
     }
+
+    //when a user types the query, this method will be executed.
+    //For example, if he types “a,” then this method will run, simultaneously for all other words.
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        artistAdapter.filter(text);
+        return false;
+    }
+
 
 }
