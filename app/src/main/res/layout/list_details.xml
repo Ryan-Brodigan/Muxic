@@ -27,29 +27,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
-    <!--<TextView-->
-        <!--android:id="@+id/playcount"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingBottom="2dip"-->
-        <!--android:textColor="@color/colorAccent" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/artistName"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingBottom="2dip"-->
-        <!--android:textColor="@color/colorAccent" />-->
-
-    <!--<TextView-->
-        <!--android:id="@android:id/text1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:paddingStart="?android:attr/listPreferredItemPaddingStart"-->
-        <!--android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"-->
-        <!--android:minHeight="?android:attr/listPreferredItemHeightSmall" />-->
-
 </LinearLayout>

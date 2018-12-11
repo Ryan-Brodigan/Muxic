@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -41,7 +40,7 @@ public class DisplayTopArtist extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_top_tracks, menu);
+        getMenuInflater().inflate(R.menu.menu_top_artists_view, menu);
         return true;
     }
 
@@ -54,6 +53,14 @@ public class DisplayTopArtist extends AppCompatActivity {
             case R.id.action_top_tracks:
                 Intent tActivity = new Intent(DisplayTopArtist.this, DisplayTopTracks.class);
                 startActivity(tActivity);
+                return true;
+            case R.id.action_favourite_artists:
+                Intent faActivity = new Intent(DisplayTopArtist.this, DisplayFavouriteArtistsActivity.class);
+                startActivity(faActivity);
+                return true;
+            case R.id.action_favourite_tracks:
+                Intent ftActivity = new Intent(DisplayTopArtist.this, DisplayFavouriteTracksActivity.class);
+                startActivity(ftActivity);
                 return true;
         }
         return super.onOptionsItemSelected(item);

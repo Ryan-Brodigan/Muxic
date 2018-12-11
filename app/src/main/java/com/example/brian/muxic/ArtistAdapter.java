@@ -69,7 +69,7 @@ public class ArtistAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
         Picasso.get().load(RetrieveTopArtistsTask.artistList.get(position).getImageURL()).fit().into(holder.iv);
-        holder.artistName.setText("Artist Name: "+ RetrieveTopArtistsTask.artistList.get(position).getName());
+        holder.artistName.setText(RetrieveTopArtistsTask.artistList.get(position).getName());
         return convertView;
     }
 

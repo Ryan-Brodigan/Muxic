@@ -79,6 +79,14 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
                 Intent tActivity = new Intent(DetailedArtistViewActivity.this, DisplayTopTracks.class);
                 startActivity(tActivity);
                 return true;
+            case R.id.action_favourite_artists:
+                Intent faActivity = new Intent(DetailedArtistViewActivity.this, DisplayFavouriteArtistsActivity.class);
+                startActivity(faActivity);
+                return true;
+            case R.id.action_favourite_tracks:
+                Intent ftActivity = new Intent(DetailedArtistViewActivity.this, DisplayFavouriteTracksActivity.class);
+                startActivity(ftActivity);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
