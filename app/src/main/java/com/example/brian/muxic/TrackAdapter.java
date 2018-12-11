@@ -11,12 +11,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class TrackAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Track> trackArr;
+    private List<Track> trackArr;
     LayoutInflater inflater;
 
     public TrackAdapter(Context context, ArrayList<Track> trackArr){
@@ -71,8 +72,13 @@ public class TrackAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         Picasso.get().load(RetrieveTopTracksTask.libraryList.get(position).getImageURL2()).into(holder.iv);
-        holder.artistName.setText("Track Name: "+ RetrieveTopTracksTask.libraryList.get(position).getName());
+        holder.artistName.setText(RetrieveTopTracksTask.libraryList.get(position).getName());
         return convertView;
+    }
+
+    void setTracks(List<Track> tracks){
+        trackArr = tracks;
+        notifyDataSetChanged();
     }
 
     //Search Function

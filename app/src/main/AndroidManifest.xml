@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.brian.muxic">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,11 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"
-                  android:label="@string/app_name">
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,6 +39,19 @@
             android:name=".DetailedTrackViewActivity"
             android:label="Detailed Track View"
             android:parentActivityName=".DisplayTopTracks" />
+        <activity
+            android:name=".FavouritesMenuActivity"
+            android:label="Favourites Menu"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DisplayFavouriteArtistsActivity"
+            android:label="Favourite Artists"
+            android:parentActivityName=".FavouritesMenuActivity"
+            />
+        <activity
+            android:name=".DisplayFavouriteTracksActivity"
+            android:label="Favourite Tracks"
+            android:parentActivityName=".FavouritesMenuActivity"/>
     </application>
 
 </manifest>

@@ -38,7 +38,7 @@ public class DisplayTopTracks extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_top_artists, menu);
+        getMenuInflater().inflate(R.menu.menu_top_tracks_view, menu);
         return true;
     }
 
@@ -52,6 +52,14 @@ public class DisplayTopTracks extends AppCompatActivity {
             case R.id.action_top_artists:
                 Intent aActivity = new Intent(DisplayTopTracks.this, DisplayTopArtist.class);
                 startActivity(aActivity);
+                return true;
+            case R.id.action_favourite_artists:
+                Intent faActivity = new Intent(DisplayTopTracks.this, DisplayFavouriteArtistsActivity.class);
+                startActivity(faActivity);
+                return true;
+            case R.id.action_favourite_tracks:
+                Intent ftActivity = new Intent(DisplayTopTracks.this, DisplayFavouriteTracksActivity.class);
+                startActivity(ftActivity);
                 return true;
         }
         return super.onOptionsItemSelected(item);

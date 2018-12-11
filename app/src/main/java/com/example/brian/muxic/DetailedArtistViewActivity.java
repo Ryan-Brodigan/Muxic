@@ -1,5 +1,7 @@
 package com.example.brian.muxic;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,24 +17,47 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class DetailedArtistViewActivity extends AppCompatActivity {
+
+    private Artist viewArtist;
+    private ArtistViewModel artistVM;
     private String lastFMUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_artist_view);
+
+        artistVM = ViewModelProviders.of(this).get(ArtistViewModel.class);
+
         Intent i = getIntent();
         parseValues(i);
+
         final Button button = findViewById(R.id.goToLastFMButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 openLastFMUrl();
             }
         });
+
+        final Button favouriteButton = findViewById(R.id.favourite_button);
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                favouriteArtist();
+            }
+        });
+
+        final Button unfavouriteButton = findViewById(R.id.unfavourite_button);
+        unfavouriteButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                unfavouriteArtist();
+            }
+        });
     }
 
+    //FAB menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -54,34 +79,72 @@ public class DetailedArtistViewActivity extends AppCompatActivity {
                 Intent tActivity = new Intent(DetailedArtistViewActivity.this, DisplayTopTracks.class);
                 startActivity(tActivity);
                 return true;
+            case R.id.action_favourite_artists:
+                Intent faActivity = new Intent(DetailedArtistViewActivity.this, DisplayFavouriteArtistsActivity.class);
+                startActivity(faActivity);
+                return true;
+            case R.id.action_favourite_tracks:
+                Intent ftActivity = new Intent(DetailedArtistViewActivity.this, DisplayFavouriteTracksActivity.class);
+                startActivity(ftActivity);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    //Button actions
     public void openLastFMUrl(){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(this.lastFMUrl));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(viewArtist.getLastFMUrl()));
         startActivity(browserIntent);
+    }
+
+    public void favouriteArtist(){
+        Button faveButton = findViewById(R.id.favourite_button);
+        faveButton.setVisibility(View.INVISIBLE);
+
+        Button unfaveButton = findViewById(R.id.unfavourite_button);
+        unfaveButton.setVisibility(View.VISIBLE);
+
+        artistVM.insert(viewArtist);
+    }
+
+    public void unfavouriteArtist(){
+        Button unfaveButton = findViewById(R.id.unfavourite_button);
+        unfaveButton.setVisibility(View.INVISIBLE);
+
+        Button faveButton = findViewById(R.id.favourite_button);
+        faveButton.setVisibility(View.VISIBLE);
+
+        artistVM.deleteByID(viewArtist.getID());
     }
 
     public void parseValues(Intent i){
         //Extract values from Intent
+        String artistID = i.getExtras().getString("ArtistID");
         String artistName = i.getExtras().getString("ArtistName");
         String artistImageURL = i.getExtras().getString("ArtistImage");
         Integer artistListeners = i.getExtras().getInt("ArtistListeners", 0);
         Integer artistPlaycount = i.getExtras().getInt("ArtistPlaycount", 0);
-        // Assign lastFMUrl value
-        this.lastFMUrl = i.getExtras().getString("ArtistUrl");
+        String lastFMUrl = i.getExtras().getString("ArtistUrl");
+
         //Get appropriate Views
         TextView artistNameView = findViewById(R.id.detailedArtistView_NameTitle);
         TextView artistListenersView =  findViewById(R.id.listenersValue);
         TextView artistPlaycountView =  findViewById(R.id.playcountValue);
         ImageView artistImageView = findViewById(R.id.artistMediumImage);
+
         //Apply appropriate values
         artistNameView.setText(artistName);
         artistListenersView.setText(artistListeners.toString());
         artistPlaycountView.setText(artistPlaycount.toString());
+
         //Use AsyncTask to download and apply image
         DownloadImageTask t = new DownloadImageTask(artistImageView, artistImageURL);
         t.execute();
+
+        //Create viewArtist
+        ArrayList<String> images = new ArrayList<>();
+        images.add(artistImageURL);
+        viewArtist = new Artist(artistID, artistName, lastFMUrl, artistPlaycount, artistListeners, images.get(0), images);
     }
+
 }

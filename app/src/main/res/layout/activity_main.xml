@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/topartistsbutton"
         android:layout_width="286dp"
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/toptracksbutton"
         android:layout_width="285dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -30,7 +31,21 @@
         android:text="@string/top_tracks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/topartistsbutton" />
+
+    <Button
+        android:id="@+id/favouritebutton"
+        android:layout_width="285dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="favourites"
+        android:text="@string/favourites"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toptracksbutton" />
 
     <ImageView
         android:layout_width="match_parent"
